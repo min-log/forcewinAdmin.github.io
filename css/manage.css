@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+
+/*로그인화면*/
+html, body {background:url('../images/bg/login_bg.jpg') center no-repeat;background-size:cover;display:block;width:100%;height:100%;}
+#container {height:auto;padding-top:180px;overflow:hidden;}
+.login_wrap {width:380px;background-color: #fff;border-radius:6px;padding:70px 0 40px 0;margin:0 auto;position:relative;}
+.login_top_icon {position:absolute;top: -30px;left: 50%;width:60px;height:60px;line-height:56px;margin-left:-30px;background:#fff;border:1px solid #e9edf0;border-radius:50%;text-align:center;} 
+.login_top_icon img {padding-bottom:4px;}
+
+#mirchat {text-align:center;padding:0 40px;}
+.lock-icon {text-align:center;font-size:28px;color:#111111;padding:0 40px;margin-top:20px;}
+.login_box {margin-top:56px;border-top:1px solid #e2e6ea;padding:40px 40px 0 40px;}
+.login_box .input-set input {height:40px;width:100%;border:1px solid #cbd3d9;box-sizing:border-box;padding:0 12px;} 
+.input-set{display: flex;width:100%;box-shadow:1px 1px 6px #cccccc;}
+.input-set i {
+    display: inline-block;
+    width: 40px;
+    border: 1px solid #D1D2D6;
+    border-right: 0;
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+    line-height: 40px;
+    box-sizing:border-box;
+    background: url('../images/icon/icon_manage.png') center no-repeat;
+}
+.input-set + .input-set {margin-top:8px;}
+.input-set + .input-set i{background: url('../images/icon/icon_pw.png') center no-repeat;}
+#login_button {margin-top:20px;display:block;width:100%;background:#1085c5;color:#fff;text-align:center;font-size:15px;border:none;border-radius:4px;height:44px;line-height:44px;}
+
+.copyright {position:absolute;bottom:0;left:0;text-align:center;display:block;width:100%;border-top:1px solid #2891cb;color:#6cb7df;height:80px;line-height:80px;box-sizing:border-box;font-size:16px;}
+
+
+
+
+
+
+/*모바일*/
+
+@media screen and (max-width:720px) {
+    
+    
+}

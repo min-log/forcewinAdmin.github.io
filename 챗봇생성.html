@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+		
+        <link href="css/fonts/font.css" rel="stylesheet" type="text/css"/>
+        <link href="css/reset.css" rel="stylesheet" type="text/css"/>
+        <link href="css/sub.css" rel="stylesheet" type="text/css"/>
+        <link href="css/common.css" rel="stylesheet" type="text/css"/><!-- header&gnb 스타일 -->
+
+        <script src="js/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="js/jquery_ui/slick.min.js" type="text/javascript"></script>
+        <script src="js/sub.js" type="text/javascript"></script>
+
+		<title>포스윈챗봇생성</title>
+	</head>
+    
+	<body>
+    <div class="container-fluid">
+        <!-- header -->
+        <div class="row header">   
+            <header class="col-sm-12">
+                <h1><img src="images/common/top_logo.png" alt="Logo"></h1>
+                <span class="manager">
+                    <span class="bell hidden">
+                        <button><i class="fas fa-bell"></i></button>
+                        <span class="notice-count">4</span>
+                        <ul class="notice hidden">
+                            <li class="notice-default">봇이 켜졌습니다.</li>
+                            <li class="notice-warning"><i class="fas fa-exclamation-triangle"></i> 봇이 꺼졌습니다.</li>
+                            <li class="notice-success"><i class="fas fa-check-square"></i> 토픽 생성에 성공하였습니다.</li>
+                            <li class="notice-error"><i class="fas fa-exclamation-circle"></i> 토픽 생성에 실패하였습니다.</li>
+                        </ul>
+                    </span>
+                    <span class="admin">
+                        admin
+                        <ul class="manager-func hidden">
+                            <li> <a href="/manage/logout.do"> 로그아웃<i class="fas fa-power-off"></i> </a></li>
+                        </ul>
+                    </span>
+                </span>
+            </header>
+        </div>
+        <!-- //header -->
+
+        <div class="row">          
+            <!-- side-nav -->
+            <div class="side-nav">
+                <ul>  
+                    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+                    <title>Insert title here</title>
+
+                    <li class="sidenav-manager"><strong>관리자</strong>
+                        <ul>
+                            <li class="highlight">
+                                <a href="javascript:void(0);"><img src="images/icon/icon_manage.png" alt="매니저 관리">매니저 관리</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><img src="images/icon/icon_generate.png" alt="매니저 생성">매니저 생성</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><img src="images/icon/icon_configuration.png" alt="환경설정">환경설정</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidenav-bot"><strong>챗봇</strong>
+                        <ul>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_cahtbot_manage.png" alt="챗봇 관리">챗봇 관리</a></li>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_cahtbot_setting.png" alt="챗봇 생성">챗봇 생성</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidenav-topic"><strong>시나리오</strong>
+                        <ul>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_global.png" alt="글로벌 토픽관리">글로벌 토픽관리</a></li>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_topic.png" alt="토픽관리">토픽관리</a></li>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_input.png" alt="간편 입력기">간편 입력기</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidenav-func"><strong>매크로 모듈</strong>
+                        <ul>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_module_manage.png" alt="모듈 관리">모듈 관리</a></li>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_module_generate.png" alt="모듈 생성">모듈 생성</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidenav-func"><strong>에이전트</strong>
+                        <ul>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_agent_manage.png" alt="에이전트 관리">에이전트 관리</a></li>
+                            <li><a href="javascript:void(0);"><img src="images/icon/icon_agent_registration.png" alt="에이전트 등록">에이전트 등록</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- <span class="menu-arrow"></span> -->
+            </div>
+            <!-- // side-nav -->
+
+            <!-- 메인 컨텐츠 시작 -->
+            <div class="contents page-manager-list page-manager-list-add">
+                <div class="row content-row">
+
+                    <div class="chatbot_wrap">
+                        <div class="manager-detail">
+                            <div id="managerInfoArea">
+                                <h2>챗봇 생성 필수 입력
+                                    <span class="list-btn-wrap">
+                                        <button class="list-btn-add">생성</button>
+                                        <button class="list-btn-cencell">취소</button>
+                                    </span>
+                                </h2>
+                                
+                            </div>
+                        </div>
+                        <!-- managerDetail -->
+                        <div id="managerDetail">
+                            
+
+                            <!-- 봇 목록(리스트) 시작 -->
+                            <div id="" class="detail-bot-list">
+                                
+                                <div class="list-contents">
+                                    <table>
+                                        <colgroup>
+                                            <col width="120" />
+                                            <col width="*" />
+                                        </colgroup>
+                                        
+                                        <tbody>
+                                            <tr>
+                                                <th class="bot-name">챗봇 이름</th>
+                                                <td class="bot-name">
+                                                    <input type="text" name="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bot-desc">챗봇 설명</th>
+                                                <td class="bot-desc">
+                                                    <!-- <input type="text" name=""> -->
+                                                    <textarea></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bot-pw">매니저 비밀번호</th>
+                                                <td class="bot-pw">
+                                                    <input type="text" name="">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="bot-setting-wrap">
+                                        <div id="" class="con_tit">
+                                            <h2>챗봇 생성 선택 입력</h2>
+                                        </div>
+                                        
+                                        <table>
+                                            <colgroup>
+                                                <col width="120" />
+                                                <col width="*" />
+                                            </colgroup>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="bot-setting">챗봇 인사말 설정</th>
+                                                    <td class="bot-setting">
+                                                        <button>편집</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="bot-setting-img">
+                                            <div>
+                                                <div>
+                                                    <img src="images/content/imgcon_04.jpg">
+                                                    <p>챗봇 인사말 설정 예시용 메세지입니다.</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <p>챗봇 인사말은 편집으로 작업 후,<br /> 미리보기처럼 이 영역에 채팅창 형태로  <br />상용자가 작업한 인사말(메세지)가 보이게 됩니다.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- 봇 목록(리스트) 끝 -->
+
+                            
+                        </div>
+                        <div class="manager-list">
+                            
+
+                            <!-- 토픽 목록(리스트) 시작 -->
+                            <div id="topicListArea" class="detail-topic-list">
+                                <p class="list-header">
+                                    <strong>토픽 목록</strong>
+                                    <span>추가할 토픽을 선택해 주십시오</span>
+                                    <!-- button type="button" class="list-btn"><i class="fas fa-caret-down"></i></button -->
+                                    
+                                </p>
+                                <div class="list-contents">
+                                    <table>
+                                        <colgroup>
+                                            <col width="40px">
+                                            <col width="15%" />
+                                            <col width="*" />
+                                            <col width="15%" />
+                                            <col width="15%" />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" name="" id="TopicCheckall">
+                                                    <label for="TopicCheckall"></label>
+                                                </th>
+                                                <th class="topic-name">토픽 이름</th>
+                                                <th class="topic-desc">토픽 설명</th>
+                                                <th class="topic-owner">토픽 소유자</th>
+                                                <th class="topic-state">공개/비공개</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="TopicCheck" id="">
+                                                    <label for=""></label>
+                                                </td>
+                                                <td class="topic-name"><span>weather</span></td>
+                                                <td class="topic-desc"><span>날씨 토픽</span></td>
+                                                <td class="topic-owner"><span>JS.KIM</span></td>
+                                                <td class="topic-state">
+                                                    <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="TopicCheck" id="">
+                                                    <label for=""></label>
+                                                </td>
+                                                <td class="topic-name"><span>museum</span></td>
+                                                <td class="topic-desc"><span>박물관 안내 토픽</span></td>
+                                                <td class="topic-owner"><span>JS.KIM</span></td>
+                                                <td class="topic-state">
+                                                    <img src="images/icon/icon_open.png" alt="lock open" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="TopicCheck" id="">
+                                                     <label for=""></label>
+                                                </td>
+                                                <td class="topic-name"><span>chocolate</span></td>
+                                                <td class="topic-desc"><span>퍼블릭 엔티티 리퀘스트 초콜릿 테스트 토픽</span></td>
+                                                <td class="topic-owner"><span>SJ.CHOI</span></td>
+                                                <td class="topic-state">
+                                                    <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="TopicCheck" id="">
+                                                     <label for=""></label>
+                                                </td>
+                                                <td class="topic-name"><span>chocolate</span></td>
+                                                <td class="topic-desc"><span>퍼블릭 엔티티 리퀘스트 초콜릿 테스트 토픽</span></td>
+                                                <td class="topic-owner"><span>SJ.CHOI</span></td>
+                                                <td class="topic-state">
+                                                    <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="TopicCheck" id="">
+                                                     <label for=""></label>
+                                                </td>
+                                                <td class="topic-name"><span>chocolate</span></td>
+                                                <td class="topic-desc"><span>퍼블릭 엔티티 리퀘스트 초콜릿 테스트 토픽</span></td>
+                                                <td class="topic-owner"><span>SJ.CHOI</span></td>
+                                                <td class="topic-state">
+                                                    <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!--  -->
+                                    <div class="pagging">
+                                        <div>
+                                            <button>
+                                                <img src="images/icon/left_next_more.gif" alt="처음" />
+                                            </button>
+                                            <button>
+                                                <img src="images/icon/left_next.gif" alt="이전" />
+                                            </button>
+                                        </div>
+
+                                        <ul>
+                                            <li class="active"><button>1</button></li>
+                                            <li><button>2</button></li>
+                                            <li><button>3</button></li>
+                                            <li><button>4</button></li>
+                                            <li><button>5</button></li>
+                                        </ul>
+                                        <div>
+                                            <button>
+                                                <img src="images/icon/right_next.gif" alt="다음" />
+                                            </button>
+                                            <button>
+                                                <img src="images/icon/right_next_more.gif" alt="마지막" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+
+                                </div>
+                            </div>
+                            <!-- 토픽 목록(리스트) 끝 -->
+
+                            <!-- 모듈 목록(리스트) 시작 -->
+                            <div id="moduleListArea" class="detail-module-list">
+                                <!-- 모듈 목록(리스트) 시작 -->
+                                <div class="detail-func-list">
+                                    <p class="list-header">
+                                        <strong>모듈 목록</strong>
+                                        <span>추가할 모듈을 선택해 주십시오</span>
+                                    </p>
+                                    <div class="list-contents">
+                                        <table>
+                                            <colgroup>
+                                                <col width="40px">
+                                                <col width="15%" />
+                                                <col width="*" />
+                                                <col width="15%" />
+                                                <col width="15%" />
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                <th>
+                                                    <input type="checkbox" name="" id="ModuleCheckall">
+                                                    <label for="ModuleCheckall"></label>
+                                                </th>
+                                                <th class="func-name">모듈 이름</th>
+                                                <th class="func-desc">모듈 설명</th>
+                                                <th class="func-owner">모듈 소유자</th>
+                                                <th class="func-state">공개/비공개</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="ModuleCheck" id="">
+                                                        <label for=""></label>
+                                                    </td>
+                                                    <td class="func-name"><span>plue_one</span></td>
+                                                    <td class="func-desc"><span>MIR-CHAT</span></td>
+                                                    <td class="func-owner"><span>SJ.CHOI</span></td>
+                                                    <td class="topic-state">
+                                                        <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="ModuleCheck" id="">
+                                                        <label for=""></label>
+                                                    </td>
+                                                    <td class="func-name"><span>MIR-TEST</span></td>
+                                                    <td class="func-desc"><span>MIR-CHAT</span></td>
+                                                    <td class="func-owner"><span>SJ.CHOI</span></td>
+                                                    <td class="topic-state">
+                                                        <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="ModuleCheck" id="">
+                                                        <label for=""></label>
+                                                    </td>
+                                                    <td class="func-name"><span>MIR-TEST</span></td>
+                                                    <td class="func-desc"><span>1차 테스트 미르챗 봇 생성</span></td>
+                                                    <td class="func-owner"><span>EJ.KOE</span></td>
+                                                    <td class="topic-state">
+                                                        <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="ModuleCheck" id="">
+                                                        <label for=""></label>
+                                                    </td>
+                                                    <td class="func-name"><span>MIR-TEST</span></td>
+                                                    <td class="func-desc"><span>1차 테스트 미르챗 봇 생성</span></td>
+                                                    <td class="func-owner"><span>EJ.KOE</span></td>
+                                                    <td class="topic-state">
+                                                        <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="ModuleCheck" id="">
+                                                        <label for=""></label>
+                                                    </td>
+                                                    <td class="func-name"><span>MIR-TEST</span></td>
+                                                    <td class="func-desc"><span>1차 테스트 미르챗 봇 생성</span></td>
+                                                    <td class="func-owner"><span>EJ.KOE</span></td>
+                                                    <td class="topic-state">
+                                                        <img src="images/icon/icon_notopen.png" alt="lock not open" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--  -->
+                                        <div class="pagging">
+                                            <div>
+                                                <button>
+                                                    <img src="images/icon/left_next_more.gif" alt="처음" />
+                                                </button>
+                                                <button>
+                                                    <img src="images/icon/left_next.gif" alt="이전" />
+                                                </button>
+                                            </div>
+
+                                            <ul>
+                                                <li class="active"><button>1</button></li>
+                                                <li><button>2</button></li>
+                                                <li><button>3</button></li>
+                                                <li><button>4</button></li>
+                                                <li><button>5</button></li>
+                                            </ul>
+                                            <div>
+                                                <button>
+                                                    <img src="images/icon/right_next.gif" alt="다음" />
+                                                </button>
+                                                <button>
+                                                    <img src="images/icon/right_next_more.gif" alt="마지막" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                                <!-- 모듈 목록(리스트) 끝 -->
+                            </div>
+                            <!-- 모듈 목록(리스트) 끝 -->
+                
+                        </div>
+                    </div>
+                </div>
+                <!-- managerDetail -->
+            </div>
+            <!-- 메인 컨텐츠 끝 -->
+        </div>
+    </div>
+
+</body>
+</html>
